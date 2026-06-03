@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOPSELLER01 — Katalog Produk</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #faf7f2;
+  --warm-white: #fff9f0;
+  --brown: #2c1810;
+  --brown-light: #5c3d2e;
+  --gold: #c8963e;
+  --gold-light: #e8b86d;
+  --text: #1a0f0a;
+  --text2: #7a6055;
+  --border: #e8ddd4;
+  --card-bg: #ffffff;
+  --radius: 16px;
+  --shadow: 0 4px 24px rgba(44,24,16,0.08);
+  --shadow-hover: 0 12px 40px rgba(44,24,16,0.16);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  background: var(--brown);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--gold-light);
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.logo span { color: #fff; }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.wa-btn {
+  background: #25D366;
+  color: #fff;
+  padding: 9px 20px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.wa-btn:hover { background: #1da851; transform: translateY(-1px); }
+
+/* ===== HERO ===== */
+.hero {
+  background: linear-gradient(135deg, var(--brown) 0%, #4a2818 50%, #6b3a22 100%);
+  padding: 60px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8963e' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.hero-content { position: relative; z-index: 1; }
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(200,150,62,0.2);
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.hero h1 span { color: var(--gold-light); }
+
+.hero p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.7);
+  max-width: 500px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-stat strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--gold-light);
+}
+
+.hero-stat span {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ===== SEARCH & FILTER ===== */
+.controls {
+  background: var(--warm-white);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 40px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 64px;
+  z-index: 90;
+  box-shadow: 0 2px 12px rgba(44,24,16,0.05);
+}
+
+.search-wrap {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+}
+
+.search-wrap svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text2);
+}
+
+.search-input {
+  width: 100%;
+  padding: 11px 16px 11px 42px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus { border-color: var(--gold); }
+.search-input::placeholder { color: var(--text2); }
+
+.sort-select {
+  padding: 11px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.sort-select:focus { border-color: var(--gold); }
+
+.result-count {
+  font-size: 14px;
+  color: var(--text2);
+  white-space: nowrap;
+}
+
+/* ===== GRID ===== */
+.catalog-section {
+  padding: 32px 40px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* ===== PRODUCT CARD ===== */
+.product-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  border: 1px solid var(--border);
+  animation: fadeUp 0.4s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--gold);
+}
+
+.card-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--cream);
+  overflow: hidden;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .card-img { transform: scale(1.05); }
+
+.card-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5ede4, #ede0d4);
+  gap: 8px;
+}
+
+.card-img-placeholder svg { opacity: 0.3; }
+.card-img-placeholder span {
+  font-size: 11px;
+  color: var(--text2);
+  font-weight: 500;
+}
+
+.card-body {
+  padding: 14px 16px 16px;
+}
+
+.card-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 40px;
+}
+
+.card-price-label {
+  font-size: 11px;
+  color: var(--text2);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.card-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--brown);
+}
+
+.card-price-sub {
+  font-size: 12px;
+  color: var(--text2);
+  margin-top: 2px;
+}
+
+.card-footer {
+  padding: 0 16px 14px;
+}
+
+.order-btn {
+  width: 100%;
+  background: var(--brown);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.order-btn:hover { background: var(--gold); color: var(--brown); }
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: #fff;
+  border-radius: 20px;
+  max-width: 560px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+  animation: modalIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-img-wrap {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--cream);
+  overflow: hidden;
+  max-height: 300px;
+}
+
+.modal-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-body { padding: 24px; }
+
+.modal-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--brown);
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.price-item {
+  background: var(--cream);
+  border-radius: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+}
+
+.price-item.highlight {
+  background: linear-gradient(135deg, var(--brown), #4a2818);
+  border-color: transparent;
+}
+
+.price-item.highlight .price-label { color: rgba(255,255,255,0.7); }
+.price-item.highlight .price-val { color: var(--gold-light); }
+
+.price-label {
+  font-size: 11px;
+  color: var(--text2);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.price-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--brown);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-order-modal {
+  flex: 1;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-order-modal:hover { background: #1da851; transform: translateY(-1px); }
+
+.btn-close-modal {
+  background: var(--cream);
+  color: var(--text2);
+  border: 1.5px solid var(--border);
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-close-modal:hover { border-color: var(--brown); color: var(--brown); }
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text2);
+  grid-column: 1 / -1;
+}
+
+.empty-state .emoji { font-size: 56px; margin-bottom: 16px; }
+.empty-state p { font-size: 16px; }
+
+/* ===== LOADING ===== */
+.loading {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text2);
+  grid-column: 1 / -1;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--brown);
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 24px;
+  font-size: 13px;
+}
+
+.footer strong { color: var(--gold-light); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .navbar { padding: 0 16px; }
+  .hero { padding: 40px 16px; }
+  .controls { padding: 14px 16px; }
+  .catalog-section { padding: 20px 16px 40px; }
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .hero-stats { gap: 24px; }
+  .price-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 400px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a class="logo" href="#"><span>TOP</span>SELLER<span style="color:var(--gold-light)">01</span></a>
+  <div class="nav-right">
+    <a class="wa-btn" href="https://wa.me/6287750883510" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Order via WA
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">✦ Toko Online Terpercaya</div>
+    <h1>Katalog Produk<br><span>TOPSELLER01</span></h1>
+    <p>Temukan ribuan produk berkualitas dengan harga terbaik. Pesan sekarang via WhatsApp!</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <strong id="stat-total">700+</strong>
+        <span>Total Produk</span>
+      </div>
+      <div class="hero-stat">
+        <strong>3</strong>
+        <span>Marketplace</span>
+      </div>
+      <div class="hero-stat">
+        <strong>Fast</strong>
+        <span>Respon WA</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" class="search-input" id="search" placeholder="Cari produk..." oninput="filterProducts()">
+  </div>
+  <select class="sort-select" id="sort" onchange="filterProducts()">
+    <option value="az">A → Z</option>
+    <option value="za">Z → A</option>
+    <option value="murah">Harga Termurah</option>
+    <option value="mahal">Harga Tertinggi</option>
+  </select>
+  <span class="result-count" id="result-count"></span>
+</div>
+
+<!-- CATALOG -->
+<div class="catalog-section">
+  <div class="product-grid" id="product-grid">
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Memuat produk...</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-img-wrap" id="modal-img-wrap"></div>
+    <div class="modal-body">
+      <div class="modal-name" id="modal-name"></div>
+      <div class="price-grid" id="modal-prices"></div>
+      <div class="modal-actions">
+        <a id="modal-wa-btn" class="btn-order-modal" href="#" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Pesan via WhatsApp
+        </a>
+        <button class="btn-close-modal" onclick="closeModalBtn()">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2026 <strong>TOPSELLER01</strong> — Semua hak dilindungi · 
+    <a href="https://wa.me/6287750883510" style="color:var(--gold-light)">087750883510</a>
+  </p>
+</footer>
+
+<script>
+// ================================================================
+//  KONFIGURASI
+// ================================================================
+const WA_NUMBER   = "6287750883510";
+const FOLDER_ID   = "1uQxFgczInmpm05OCauA9dJhjwVhR13-v"; // Google Drive folder foto
+const SCRIPT_URL  = "https://script.google.com/macros/s/AKfycbxCqvnu0mjWd9sVz-6s-Wqz6-6_fn7ctar6lXvDoYHWmrIk1idoS4XO7TzTpkAgJjrs/exec";
+
+let allProducts = [];
+let driveFiles  = {};
+
+// ================================================================
+//  AMBIL DATA DARI GOOGLE APPS SCRIPT (stok & harga)
+// ================================================================
+async function loadProducts() {
+  try {
+    const res  = await fetch(SCRIPT_URL + "?action=katalog");
+    const data = await res.json();
+    allProducts = data;
+  } catch(e) {
+    // Fallback: data kosong
+    allProducts = [];
+  }
+
+  document.getElementById('stat-total').textContent = allProducts.length + '+';
+  filterProducts();
+}
+
+// ================================================================
+//  FUZZY MATCH nama barang → nama file foto
+// ================================================================
+function getImageUrl(nama) {
+  if (!nama) return null;
+  const key = nama.toLowerCase();
+  const words = key.split(/\s+/).filter(w => w.length > 2);
+
+  for (const fileId in driveFiles) {
+    const fileName = driveFiles[fileId].toLowerCase().replace(/\.[^.]+$/, '');
+    const fileWords = fileName.split(/[\s_\-]+/);
+    let matchCount = 0;
+    for (const w of words) {
+      if (fileWords.some(fw => fw.includes(w) || w.includes(fw))) matchCount++;
+    }
+    if (matchCount >= Math.min(2, words.length)) {
+      return \`https://drive.google.com/thumbnail?id=\${fileId}&sz=w400\`;
+    }
+  }
+  return null;
+}
+
+// ================================================================
+//  FORMAT HARGA
+// ================================================================
+function formatRp(n) {
+  if (!n || n === 0) return '-';
+  return 'Rp ' + Number(n).toLocaleString('id-ID');
+}
+
+// ================================================================
+//  RENDER PRODUK
+// ================================================================
+function filterProducts() {
+  const q    = document.getElementById('search').value.toLowerCase();
+  const sort = document.getElementById('sort').value;
+
+  let filtered = allProducts.filter(p =>
+    !q || p.nama.toLowerCase().includes(q)
+  );
+
+  if (sort === 'az') filtered.sort((a,b) => a.nama.localeCompare(b.nama));
+  else if (sort === 'za') filtered.sort((a,b) => b.nama.localeCompare(a.nama));
+  else if (sort === 'murah') filtered.sort((a,b) => (a.hOff||0) - (b.hOff||0));
+  else if (sort === 'mahal') filtered.sort((a,b) => (b.hOff||0) - (a.hOff||0));
+
+  document.getElementById('result-count').textContent =
+    filtered.length + ' produk ditemukan';
+
+  const grid = document.getElementById('product-grid');
+
+  if (filtered.length === 0) {
+    grid.innerHTML = \`
+      <div class="empty-state">
+        <div class="emoji">🔍</div>
+        <p>Produk tidak ditemukan</p>
+      </div>\`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map((p, i) => {
+    const imgUrl = getImageUrl(p.nama);
+    const imgHTML = imgUrl
+      ? \`<img class="card-img" src="\${imgUrl}" alt="\${p.nama}" loading="lazy" onerror="this.parentElement.innerHTML=placeholderHTML()">\`
+      : placeholderHTML();
+
+    return \`
+      <div class="product-card" style="animation-delay:\${Math.min(i*0.04,0.4)}s" onclick="openModal(\${i}, \${JSON.stringify(filtered).replace(/"/g,'&quot;')})">
+        <div class="card-img-wrap">\${imgHTML}</div>
+        <div class="card-body">
+          <div class="card-name">\${p.nama}</div>
+          <div class="card-price-label">Harga Offline</div>
+          <div class="card-price">\${formatRp(p.hOff)}</div>
+        </div>
+        <div class="card-footer">
+          <a class="order-btn" href="\${waLink(p.nama)}" target="_blank" onclick="event.stopPropagation()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Pesan WA
+          </a>
+        </div>
+      </div>\`;
+  }).join('');
+}
+
+function placeholderHTML() {
+  return \`<div class="card-img-placeholder">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c8963e" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+    <span>Foto Segera Hadir</span>
+  </div>\`;
+}
+
+function waLink(nama) {
+  const msg = encodeURIComponent(\`Halo TOPSELLER01, saya ingin memesan:\n*\${nama}*\n\nMohon informasi ketersediaan dan harga terbaik. Terima kasih! 🙏\`);
+  return \`https://wa.me/\${WA_NUMBER}?text=\${msg}\`;
+}
+
+// ================================================================
+//  MODAL
+// ================================================================
+let currentFiltered = [];
+
+function openModal(idx, filtered) {
+  currentFiltered = filtered;
+  const p = filtered[idx];
+  const imgUrl = getImageUrl(p.nama);
+
+  document.getElementById('modal-img-wrap').innerHTML = imgUrl
+    ? \`<img class="modal-img" src="\${imgUrl}" alt="\${p.nama}" onerror="this.parentElement.innerHTML=''">\`
+    : '';
+
+  document.getElementById('modal-name').textContent = p.nama;
+
+  document.getElementById('modal-prices').innerHTML = \`
+    <div class="price-item">
+      <div class="price-label">Harga (1)</div>
+      <div class="price-val">\${formatRp(p.h1)}</div>
+    </div>
+    <div class="price-item">
+      <div class="price-label">Harga (2)</div>
+      <div class="price-val">\${formatRp(p.h2)}</div>
+    </div>
+    <div class="price-item">
+      <div class="price-label">Harga (3)</div>
+      <div class="price-val">\${formatRp(p.h3)}</div>
+    </div>
+    <div class="price-item highlight">
+      <div class="price-label">Harga Offline</div>
+      <div class="price-val">\${formatRp(p.hOff)}</div>
+    </div>\`;
+
+  document.getElementById('modal-wa-btn').href = waLink(p.nama);
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModalBtn();
+}
+
+function closeModalBtn() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModalBtn();
+});
+
+// ================================================================
+//  INIT
+// ================================================================
+loadProducts();
+</script>
+</body>
+</html>
