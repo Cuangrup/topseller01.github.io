@@ -642,20 +642,17 @@ let driveFiles  = {};
 // ================================================================
 //  AMBIL DATA DARI GOOGLE APPS SCRIPT (stok & harga)
 // ================================================================
-async function loadProducts() {
-  try {
-    const res  = await fetch(SCRIPT_URL + "?action=katalog");
-    const data = await res.json();
-    allProducts = data;
-  } catch(e) {
-    // Fallback: data kosong
-    allProducts = [];
-  }
+function loadProducts() {
+  const script = document.createElement('script');
+  script.src = SCRIPT_URL + '?action=katalog&callback=handleData';
+  document.head.appendChild(script);
+}
 
+function handleData(data) {
+  allProducts = data;
   document.getElementById('stat-total').textContent = allProducts.length + '+';
   filterProducts();
 }
-
 // ================================================================
 //  FUZZY MATCH nama barang → nama file foto
 // ================================================================
