@@ -644,7 +644,10 @@ let driveFiles  = {};
 // ================================================================
 function loadProducts() {
   const script = document.createElement('script');
-  script.src = SCRIPT_URL + '?action=katalog&callback=handleData';
+  script.onerror = function() {
+    document.getElementById('product-grid').innerHTML = '<div class="empty-state"><div class="emoji">⚠️</div><p>Gagal memuat data</p></div>';
+  };
+  script.src = 'https://script.google.com/macros/s/AKfycbxCqvnu0mjWd9sVz-6s-Wqz6-6_fn7ctar6lXvDoYHWmrIk1idoS4XO7TzTpkAgJjrs/exec?action=katalog&callback=handleData&t=' + Date.now();
   document.head.appendChild(script);
 }
 
